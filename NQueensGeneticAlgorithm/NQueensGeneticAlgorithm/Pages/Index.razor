@@ -5,3 +5,32 @@
 Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
+
+<button class="btn btn-danger" @onclick="Resolver">Não me clique</button>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+
+    }
+
+    public void Resolver()
+    {
+        PrintBoard(new Solver().Solve(8, 1000, 0.99));
+    }
+
+    public void PrintBoard(int[,] board)
+    {
+        for (int i = 0; i < board.GetLength(0); i++)
+        {
+            for (int j = 0; j < board.GetLength(1); j++)
+            {
+                Console.Write(board[i, j]);
+            }
+
+            Console.WriteLine("");
+        }
+    }
+
+}
