@@ -28,12 +28,33 @@ namespace NQueensGeneticAlgorithm.Models
             return costTotal;
         }
 
-        public int[,] GenerateNextBoard(int[,] board)
+        public int[,] GenerateNextBoard(int[,] board, int row, int column)
         {
+
             // Dados o estado atual do tabuleiro
             // Movimentar de forma aleatória as rainhas nas colunas, mantendo sempre as linhas
+            for (int i = 0; i < board.GetLength(0); i++)
+            {
+                int colunaRainha = 0;
+                for (int j = 0; j < board.GetLength(1); j++)
+                {
 
-            throw new NotImplementedException();
+                    if (board[i, j] == 1)
+                    {
+                        colunaRainha = j;
+                    }
+
+                }
+
+                Random random = new Random();
+                int novaColunaRainha = random.Next(board.GetLength(1));
+
+                board[i, colunaRainha] = 0;
+                board[i, novaColunaRainha] = 1;
+
+            }
+
+            return board;
         }
 
         private int SearchByQueensAttackingRow(int[,] board, int row, int column)
