@@ -1,0 +1,33 @@
+﻿@page "/nQueens"
+
+
+<h3>Nqueens</h3>
+
+<div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Digite um numero de Rainhas: </label>
+    <input type="number" class="form-control" min="4" max="15" @bind="N">
+</div>
+
+<button type="button" class="btn btn-primary" @onclick="Resolver">Resolver</button>
+
+@if (MostrarResultado) { 
+<div class="grid" style="width:400px; height:400px;">
+    @for (int i = 0; i < 16; i++)
+    {
+        <div>i</div>
+    }
+
+</div>
+}
+@code {
+    public int N { get; set; }
+    public int [,] Solucao { get; set; }
+    public bool MostrarResultado { get; set; }
+
+    public void Resolver()
+    {
+
+        Solucao = new Solver().Solve(N, 1000, 0.99);
+    }
+
+}
