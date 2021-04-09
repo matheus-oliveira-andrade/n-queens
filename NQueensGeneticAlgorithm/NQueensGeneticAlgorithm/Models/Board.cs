@@ -28,7 +28,7 @@ namespace NQueensGeneticAlgorithm.Models
             return costTotal;
         }
 
-        public int[,] GenerateNextBoard(int[,] board, int row, int column)
+        public int[,] GenerateNextBoard(int[,] board)
         {
 
             // Dados o estado atual do tabuleiro
