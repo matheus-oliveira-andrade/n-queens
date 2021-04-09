@@ -88,14 +88,15 @@ namespace NQueensGeneticAlgorithm.Models
             // Diagonal princial parte de cima
             for (int i = board.GetLength(0); i < board.GetLength(0); i--)
             {
-                if (board[row - i, column - i] == 1 && i != row)
+                if (PositionValid(board.GetLength(0), board.GetLength(1), row - i, column - i) && board[row - i, column - i] == 1 && i != row)
                     countQueensAttacking++;
             }
+
 
             // Diagonal princial parte de baixo
             for (int i = 0; i < board.GetLength(0); i++)
             {
-                if (board[row + i, column + i] == 1 && i != row)
+                if (PositionValid(board.GetLength(0), board.GetLength(1), row + i, column + i) && board[row + i, column + i] == 1 && i != row)
                     countQueensAttacking++;
             }
 
@@ -109,14 +110,14 @@ namespace NQueensGeneticAlgorithm.Models
             // Diagonal secundaria parte de cima
             for (int i = board.GetLength(0); i < board.GetLength(0); i--)
             {
-                if (board[row - i, column + i] == 1 && i != row)
+                if (PositionValid(board.GetLength(0), board.GetLength(1), row - i, column + i) && board[row - i, column + i] == 1 && i != row)
                     countQueensAttacking++;
             }
 
             // Diagonal secundaria parte de baixo
             for (int i = 0; i < board.GetLength(0); i++)
             {
-                if (board[row + i, column - i] == 1 && i != row)
+                if (PositionValid(board.GetLength(0), board.GetLength(1), row + i, column - i) && board[row + i, column - i] == 1 && i != row)
                     countQueensAttacking++;
             }
 
