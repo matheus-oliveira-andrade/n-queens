@@ -11,19 +11,19 @@ namespace NQueensGeneticAlgorithm.Models
         /// <param name="temperature">Temperatura inicial</param>
         /// <param name="coolingRate">Taxa de resfriamento</param>
         /// <returns></returns>
-        public int[,] Solve(int n, double temperature, double coolingRate)
+        public void Solve(int n, double temperature, double coolingRate, out int [,] resultado, out bool encontrouSolucao)
         {
             var boardUtils = new Board();
 
             int[,] bestBoard = GeneratePopulateBoard(n);
 
-            bestBoard = new int[,]
-            {
-               { 0, 1, 0, 0, },
-               { 1, 0, 0, 0, },
-               { 1, 0, 0, 0, },
-               { 0, 0, 1, 0, }
-            };
+            //bestBoard = new int[,]
+            //{
+            //   { 0, 1, 0, 0, },
+            //   { 1, 0, 0, 0, },
+            //   { 1, 0, 0, 0, },
+            //   { 0, 0, 1, 0, }
+            //};
 
             int[,] nextBoard;
             int bestProbability = boardUtils.CalculateCostBoard(bestBoard);
@@ -57,7 +57,9 @@ namespace NQueensGeneticAlgorithm.Models
                 }
             }
 
-            return bestBoard;
+            resultado = bestBoard;
+            encontrouSolucao = temperature > 0;
+
         }
 
         /// <summary>

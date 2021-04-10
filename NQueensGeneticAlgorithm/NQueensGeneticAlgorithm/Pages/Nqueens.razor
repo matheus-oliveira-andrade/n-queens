@@ -4,31 +4,77 @@
 <h3>Nqueens</h3>
 
 <div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label">Digite um numero de Rainhas: </label>
+    <label for="exampleFormControlInput1" class="form-label">Valor de N </label>
     <input type="number" class="form-control" min="4" max="15" @bind="N">
+
+    <label for="exampleFormControlInput1" class="form-label">Temperatura </label>
+    <input type="number" class="form-control" @bind="Temperatura">
+
+    <label for="exampleFormControlInput1" class="form-label">Taxa de Resfriamento </label>
+    <input type="text" class="form-control" @bind="TaxaResfriamento">
 </div>
 
 <button type="button" class="btn btn-primary" @onclick="Resolver">Resolver</button>
 
-@if (MostrarResultado) { 
-<div class="grid" style="width:400px; height:400px;">
-    @for (int i = 0; i < 16; i++)
+@if (MostrarResultado)
+{
+    if (EncontrouSolucao)
     {
-        <div>i</div>
+        <div class="alert alert-success mt-2" role="alert">
+            Uma solução foi encontrada!! =D
+        </div>
     }
+    else
+    {
+        <div class="alert alert-danger mt-2" role="alert">
+            Não foi encontrada uma solução com os parâmetros informados
+        </div>
+    }
+    <div class="grid" style="width:@(Dimensao)px ; height:@(Dimensao)px">
+        @PrintarBoard()
 
-</div>
+    </div>
 }
 @code {
     public int N { get; set; } = 4;
-    public int [,] Solucao { get; set; }
+    public int[,] Solucao { get; set; }
     public bool MostrarResultado { get; set; }
+    public bool EncontrouSolucao { get; set; }
+    public int Temperatura { get; set; } = 20000;
+    public double TaxaResfriamento { get; set; } = 0.99;
+    public int Dimensao { get; set; }
 
     public void Resolver()
     {
-
-        Solucao = new Solver().Solve(N, 1000, 0.99);
+        int[,] solucao;
+        bool encontrouSolucao;
+        new Solver().Solve(N, Temperatura, TaxaResfriamento, out solucao, out encontrouSolucao);
         MostrarResultado = true;
+        Solucao = solucao;
+        EncontrouSolucao = encontrouSolucao;
+        Dimensao = N * 100;
     }
+    public MarkupString PrintarBoard()
+    {
+        string resultado = "";
+        for (int i = 0; i < Solucao.GetLength(0); i++)
+        {
+            for (int j = 0; j < Solucao.GetLength(1); j++)
+            {
+                if (Solucao[i, j] == 1)
+                {
+                    resultado += "<div>Q</div>";
+                }
+                else
+                {
+                    resultado += "<div></div>";
 
+                }
+
+            }
+
+        }
+        MarkupString resultString = (MarkupString)resultado;
+        return resultString;
+    }
 }
