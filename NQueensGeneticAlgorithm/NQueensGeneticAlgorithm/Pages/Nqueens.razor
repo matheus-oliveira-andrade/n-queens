@@ -20,7 +20,7 @@
 </div>
 }
 @code {
-    public int N { get; set; }
+    public int N { get; set; } = 4;
     public int [,] Solucao { get; set; }
     public bool MostrarResultado { get; set; }
 
@@ -28,6 +28,7 @@
     {
 
         Solucao = new Solver().Solve(N, 1000, 0.99);
+        MostrarResultado = true;
     }
 
 }

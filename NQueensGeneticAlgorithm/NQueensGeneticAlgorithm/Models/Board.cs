@@ -42,6 +42,7 @@ namespace NQueensGeneticAlgorithm.Models
                     if (board[i, j] == 1)
                     {
                         colunaRainha = j;
+                        break;
                     }
 
                 }
@@ -86,17 +87,51 @@ namespace NQueensGeneticAlgorithm.Models
             int countQueensAttacking = 0;
 
             // Diagonal princial parte de cima
-            for (int i = board.GetLength(0); i < board.GetLength(0); i--)
+            //for (int i = board.GetLength(0) - 1; i != 0; i--)
+            //{
+            //    bool posicaoValida = PositionValid(board.GetLength(0), board.GetLength(1), i - row, i - column);
+            //    bool ehUmarainha = board[i - row, i - column] == 1;
+            //    bool ehMesmaLinhaDoProcurado = i != row;
+
+            //    if (posicaoValida && ehUmarainha && ehMesmaLinhaDoProcurado)
+            //        countQueensAttacking++;
+            //}
+
+            for (int i = 0; i < board.GetLength(0); i++)
             {
-                if (PositionValid(board.GetLength(0), board.GetLength(1), row - i, column - i) && board[row - i, column - i] == 1 && i != row)
+                int linhaAtual = row + i;
+                int colunaAtual = column + i;
+
+                bool posicaoValida = PositionValid(board.GetLength(0), board.GetLength(1), linhaAtual, colunaAtual);
+                bool ehUmarainha = posicaoValida ? board[linhaAtual, colunaAtual] == 1 : false;
+                bool ehMesmaLinhaDoProcurado = linhaAtual == row;
+
+                if (posicaoValida && ehUmarainha && !ehMesmaLinhaDoProcurado)
                     countQueensAttacking++;
             }
 
 
             // Diagonal princial parte de baixo
+            //for (int i = 0; i < board.GetLength(0); i++)
+            //{
+            //    bool posicaoValida = PositionValid(board.GetLength(0), board.GetLength(1), row + i, column + i);
+            //    bool ehUmarainha = board[row + i, column + i] == 1;
+            //    bool ehMesmaLinhaDoProcurado = i != row;
+
+            //    if (posicaoValida && ehUmarainha && ehMesmaLinhaDoProcurado)
+            //        countQueensAttacking++;
+            //}
+
             for (int i = 0; i < board.GetLength(0); i++)
             {
-                if (PositionValid(board.GetLength(0), board.GetLength(1), row + i, column + i) && board[row + i, column + i] == 1 && i != row)
+                int linhaAtual = row - i; // 1
+                int colunaAtual = column - i; // 0
+
+                bool posicaoValida = PositionValid(board.GetLength(0), board.GetLength(1), linhaAtual, colunaAtual);
+                bool ehUmarainha = posicaoValida ? board[linhaAtual, colunaAtual] == 1 : false;
+                bool ehMesmaLinhaDoProcurado = linhaAtual == row;
+
+                if (posicaoValida && ehUmarainha && !ehMesmaLinhaDoProcurado)
                     countQueensAttacking++;
             }
 
@@ -108,16 +143,40 @@ namespace NQueensGeneticAlgorithm.Models
             int countQueensAttacking = 0;
 
             // Diagonal secundaria parte de cima
-            for (int i = board.GetLength(0); i < board.GetLength(0); i--)
+            //for (int i = board.GetLength(0) - 1; i != 0; i--)
+            //{
+            //    bool posicaoValida = PositionValid(board.GetLength(0), board.GetLength(1), i - row, column + i);
+            //    bool ehUmarainha = board[i - row, i - column] == 1;
+            //    bool ehMesmaLinhaDoProcurado = i != row;
+
+            //    if (posicaoValida && ehUmarainha && ehMesmaLinhaDoProcurado)
+            //        countQueensAttacking++;
+            //}
+
+            for (int i = 0; i < board.GetLength(0); i++)
             {
-                if (PositionValid(board.GetLength(0), board.GetLength(1), row - i, column + i) && board[row - i, column + i] == 1 && i != row)
+                int linhaAtual = row + i; // 0
+                int colunaAtual = column - i; //  2
+
+                bool posicaoValida = PositionValid(board.GetLength(0), board.GetLength(1), linhaAtual, colunaAtual);
+                bool ehUmarainha = posicaoValida ? board[linhaAtual, colunaAtual] == 1 : false;
+                bool ehMesmaLinhaDoProcurado = linhaAtual == row;
+
+                if (posicaoValida && ehUmarainha && !ehMesmaLinhaDoProcurado)
                     countQueensAttacking++;
             }
 
             // Diagonal secundaria parte de baixo
             for (int i = 0; i < board.GetLength(0); i++)
             {
-                if (PositionValid(board.GetLength(0), board.GetLength(1), row + i, column - i) && board[row + i, column - i] == 1 && i != row)
+                int linhaAtual = row - i; // 2
+                int colunaAtual = column + i; //  0
+
+                bool posicaoValida = PositionValid(board.GetLength(0), board.GetLength(1), linhaAtual, colunaAtual);
+                bool ehUmarainha = posicaoValida ? board[linhaAtual, colunaAtual] == 1 : false;
+                bool ehMesmaLinhaDoProcurado = linhaAtual == row;
+
+                if (posicaoValida && ehUmarainha && !ehMesmaLinhaDoProcurado)
                     countQueensAttacking++;
             }
 

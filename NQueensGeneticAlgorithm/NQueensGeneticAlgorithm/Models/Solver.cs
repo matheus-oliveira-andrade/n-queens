@@ -17,16 +17,23 @@ namespace NQueensGeneticAlgorithm.Models
 
             int[,] bestBoard = GeneratePopulateBoard(n);
 
+            bestBoard = new int[,]
+            {
+               { 0, 1, 0, 0, },
+               { 1, 0, 0, 0, },
+               { 1, 0, 0, 0, },
+               { 0, 0, 1, 0, }
+            };
+
             int[,] nextBoard;
             int bestProbability = boardUtils.CalculateCostBoard(bestBoard);
 
             for (; temperature > 0 && bestProbability != 0; temperature = temperature - coolingRate)
             {
-                //TODO: IMPLEMENTAR
-                nextBoard = boardUtils.GenerateNextBoard(bestBoard);
+                nextBoard = boardUtils.GenerateNextBoard((int[,])bestBoard.Clone());
 
-                double costBest = boardUtils.CalculateCostBoard(bestBoard);
-                double costNext = boardUtils.CalculateCostBoard(nextBoard);
+                int costBest = boardUtils.CalculateCostBoard(bestBoard);
+                int costNext = boardUtils.CalculateCostBoard(nextBoard);
 
                 double delta = costBest - costNext;
 
@@ -35,11 +42,19 @@ namespace NQueensGeneticAlgorithm.Models
 
                 var random = new Random();
 
+                Console.WriteLine($"Custo do melhor: {costBest}, custo do próximo: {costNext}, custo do delta: {delta}, fitness: {fitness}, temperatura: {temperature}");
+
                 // Se delta for maior que zero significa que o estado gerado é melhor que o atual
                 if (delta > 0)
+                {
                     bestBoard = nextBoard;
+                    bestProbability = costNext;
+                }
                 else if (random.Next(1) <= fitness)
+                {
                     bestBoard = nextBoard;
+                    bestProbability = costNext;
+                }
             }
 
             return bestBoard;
