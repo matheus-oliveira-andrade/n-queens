@@ -27,27 +27,6 @@ o estado atual deve ser o próximo estado gerado
 
 ou então se o valor gerado aleatóriamente for menor ou igual a probabilidade então o estado atual deve ser o próximo estado gerado
 
-
-LÓGICA MOVIMENTOS PARA VALIDAÇÃO RAINHA EM POSIÇÃO DE ATAQUE
---------------------------------------------------------------------
-
-- Para andar na diagonal principal para cima 
-	- -1 na linha e na coluna
-- Para andar na diagonal princial para baixo 
-	- +1 na linha e na coluna
-
-- Para andar na diagonal secundaria para cima
-	- +1 na coluna e -1 na linha
-- Para andar na diagonal secundaria para baixo
-	- -1 na coluna e +1 na linha
-
-- Andar para os lados 
-	 - para cima | Linha - 1, Coluna
-	 - para direita | Linha, Coluna + 1
-	 - para baixo | Linha + 1, Coluna
-	 - para esquerda | Linha, Coluna - 1
-
-
 # Referências
 
 https://en.wikipedia.org/wiki/Eight_queens_puzzle
